@@ -1,0 +1,44 @@
+{% set name = "jsonschema-specifications" %}
+{% set version = "2023.7.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/jsonschema_specifications-{{ version }}.tar.gz
+  sha256: c91a50404e88a1f6ba40636778e2ee08f6e24c5613fe4c53ac24578a5a7f72bb
+
+build:
+  skip: true  # [py<38]
+  script: {{ PYTHON }} -m pip install . -vv
+  number: 0
+
+requirements:
+  host:
+    - python >=3.8
+    - hatchling
+    - hatch-vcs
+    - pip
+  run:
+    - python >=3.8
+    - referencing >=0.28.0
+    - importlib-resources >=1.4.0  # [py<39]
+
+test:
+  imports:
+    - jsonschema_specifications
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  summary: The JSON Schema meta-schemas and vocabularies, exposed as a Registry
+  dev_url: https://github.com/python-jsonschema/jsonschema-specifications
+  license: MIT
+  license_file: COPYING
+
+extra:
+  recipe-maintainers:
+    - cbouss
