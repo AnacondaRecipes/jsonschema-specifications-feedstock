@@ -10,19 +10,19 @@ source:
 
 build:
   number: 0
-  noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  skip: true  # [py<38]
 
 requirements:
   host:
     - hatch-vcs
     - hatchling
     - pip
-    - python >=3.8
+    - python
   run:
-    - importlib_resources >=1.4.0
-    - python >=3.8
-    - referencing >=0.25.0
+    - importlib_resources >=1.4.0 # [py<39]
+    - python
+    - referencing >=0.28.0
 
 test:
   imports:
@@ -40,7 +40,12 @@ about:
   home: https://github.com/python-jsonschema/jsonschema-specifications
   license: MIT
   license_file: COPYING
+  license_family: MIT
+  description: |
+    JSON support files from the JSON Schema Specifications (metaschemas, vocabularies, etc.), 
+    packaged for runtime access from Python as a referencing-based Schema Registry.
   doc_url: https://jsonschema-specifications.readthedocs.io
+  dev_url: https://github.com/python-jsonschema/jsonschema-specifications
 
 extra:
   recipe-maintainers:
