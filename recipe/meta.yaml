@@ -29,6 +29,7 @@ test:
     - jsonschema_specifications
   commands:
     - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
     - pytest -ra -v --tb=short --pyargs jsonschema_specifications --cov-branch --cov=jsonschema_specifications --cov-report=term-missing:skip-covered --no-cov-on-fail --cov-fail-under=88
   requires:
     - pip
